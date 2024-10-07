@@ -6,7 +6,7 @@
 /*   By: marrey <marrey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:14:54 by marrey            #+#    #+#             */
-/*   Updated: 2024/10/05 18:30:03 by marrey           ###   ########.fr       */
+/*   Updated: 2024/10/07 21:06:33 by marrey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	print_args(va_list ap, char specifier)
 	count_char = 0;
 	if (specifier == 'c')
 		count_char += handling_char(ap);
+	else if (specifier == 'u')
+		count_char += handling_unsigned(ap);
 	else if (specifier == 's')
 		count_char += handling_string(ap);
 	else if (specifier == 'd' || specifier == 'i')
@@ -54,3 +56,9 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (count_char);
 }
+
+// int	main()
+// {
+// 	ft_printf("holabb %x",16);
+// 	return (0);
+// }

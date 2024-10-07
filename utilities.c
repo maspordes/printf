@@ -6,7 +6,7 @@
 /*   By: marrey <marrey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:16:10 by marrey            #+#    #+#             */
-/*   Updated: 2024/10/05 18:42:24 by marrey           ###   ########.fr       */
+/*   Updated: 2024/10/07 21:15:49 by marrey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ int	ft_putnbr(int nb)
 	int	count_char;
 
 	count_char = 0;
-	if (nb == -2147483647)
-		count_char += write(1, "-2147483647", 11);
+	if (nb == -2147483648)
+	{
+		count_char += write(1, "-2147483648", 11);
+		return (count_char);	
+	}
+	
 	if (nb < 0)
 	{
 		count_char += write(1, "-", 1);
@@ -46,7 +50,7 @@ int	ft_putnbr_base(unsigned long nbr, char *base)
 	int	count_char;
 
 	count_char = 0;
-	if (nbr > 16)
+	if (nbr > 15)
 		count_char += ft_putnbr_base(nbr / 16, base);
 	count_char += write(1, &base[nbr % 16], 1);
 	return (count_char);
@@ -62,5 +66,16 @@ int	ft_putstr(char *str)
 		count_char += ft_putchar(*str);
 		str++;
 	}
+	return (count_char);
+}
+
+int ft_putnbr_unsigned(unsigned int nb)
+{
+	int	count_char;
+
+	count_char = 0;
+	if (nb >= 10)
+		count_char += ft_putnbr_unsigned(nb / 10);
+	count_char += ft_putchar((nb % 10) + '0');
 	return (count_char);
 }
